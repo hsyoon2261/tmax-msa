@@ -1,5 +1,5 @@
 server:
-  port: 50003
+  port: 50002
 
 spring:
   application:
@@ -12,11 +12,7 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    generate-ddl: true
-    database: h2
-    defer-datasource-initialization: true
+      ddl-auto: update
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
@@ -35,4 +31,3 @@ eureka:
 logging:
   level:
     com.example.orderservice: DEBUG
-

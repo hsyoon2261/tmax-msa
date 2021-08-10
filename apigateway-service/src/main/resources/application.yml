@@ -21,7 +21,24 @@ spring:
           filters:
             - AddRequestHeader=second-header, kenneth
             - AddResponseHeader=second-response, Hello
-
+        - id: user-service
+          predicates:
+            - Path=/user-service/**
+          uri: lb://USER-SERVICE
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: catalog-service
+          predicates:
+            - Path=/catalog-service/**
+          uri: lb://CATALOG-SERVICE
+          filters:
+            - RewritePath=/catalog-service/(?<segment>.*), /$\{segment}
+        - id: order-service
+          predicates:
+            - Path=/order-service/**
+          uri: lb://ORDER-SERVICE
+          filters:
+            - RewritePath=/order-service/(?<segment>.*), /$\{segment}
 eureka:
   client:
     register-with-eureka: true
