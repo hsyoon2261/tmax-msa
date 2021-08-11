@@ -23,10 +23,26 @@ spring:
             - AddResponseHeader=second-response, Hello
         - id: user-service
           predicates:
-            - Path=/user-service/**
+            - Path=/user-service/login
+            - Method=POST
           uri: lb://USER-SERVICE
           filters:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          uri: lb://USER-SERVICE
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          predicates:
+            - Path=/user-service/**
+            - Method=GET
+          uri: lb://USER-SERVICE
+          filters:
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter
         - id: catalog-service
           predicates:
             - Path=/catalog-service/**
@@ -45,3 +61,7 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+token:
+  expiration_time: 864000000
+  secret: user_token
