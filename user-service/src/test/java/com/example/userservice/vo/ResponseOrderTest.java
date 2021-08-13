@@ -15,6 +15,6 @@ class ResponseOrderTest {
         Integer totalPrice = order.getUnitPrice() * order.getQty();
         order.setTotalPrice(totalPrice);
 
-        assertEquals(1000, order.getTotalPrice());
+        assertEquals(500, order.getTotalPrice());
     }
 }

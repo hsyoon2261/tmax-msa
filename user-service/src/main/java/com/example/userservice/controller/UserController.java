@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,7 +35,11 @@ public class UserController {
 
     @GetMapping("/health_check")
     public String status(HttpServletRequest request) {
-        return String.format("It's Working in User Service on Port %s", request.getServerPort());
+        return String.format("It's Working in User Service, " +
+                "port(local.server.port)=%s, port(server.port)=%s, " +
+                "token_secret=%s, token_expiration_time=%s, gateway_ip=%s",
+                env.getProperty("local.server.port"), env.getProperty("server.port"),
+                env.getProperty("token.secret"), env.getProperty("token.expiration_time"), env.getProperty("gateway.ip"));
     }
 
     @GetMapping("/welcome")
@@ -57,7 +62,7 @@ public class UserController {
 
     /* 전체 사용자 목록 */
     @GetMapping("/users")
-    public List<ResponseUser> getUsers() {
+    public List<ResponseUser> getUsers(HttpServletRequest request) {
         Iterable<UserEntity> usersList = userService.getUserByAll();
         List<ResponseUser> result = new ArrayList<>();
 

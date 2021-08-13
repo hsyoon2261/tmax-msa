@@ -34,7 +34,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         super.setAuthenticationManager(authenticationManager);
         this.userService = userService;
         this.env = env;
-        super.setAuthenticationManager(authenticationManager);
     }
 
     @Override
@@ -68,7 +67,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .compact();
 
         response.addHeader("token", token);
-
-        response.addHeader("userId", userName);
+        response.addHeader("userId", userDetails.getUserId());
     }
 }
