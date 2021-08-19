@@ -1,0 +1,5 @@
+encrypt:
+  key-store:
+    location: file:///Users/yoonheesang/Documents/my-spring-cloud-config-1/keystore/apiEncryptionKey.jks
+    password: 1q2w3e4r
+    alias: apiEncryptionKey
