@@ -35,7 +35,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
         http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
-                .access("hasIpAddress('192.168.219.103') or hasIpAddress('127.0.0.1')")
+                .access("hasIpAddress('10.10.20.93') or hasIpAddress('127.0.0.1')")
                 .and()
                 .addFilter(getAuthenticationFilter()); //5줄 밑 AuthenticationFilter부분과 연동. 필터작업에서 인증처리를 한다 보면 됨.
 

@@ -7,12 +7,10 @@ import java.util.Date;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ResponseOrder {
+public class ResponseCatalog {
     private String productId;
-    private Integer qty;
+    private String productName;
     private Integer unitPrice;
-    private Integer totalPrice;
+    private Integer stock;
     private Date createdAt;
-    private String instanceId;
-    private String orderId;
 }

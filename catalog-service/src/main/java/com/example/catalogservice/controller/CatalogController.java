@@ -9,6 +9,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,5 +44,16 @@ public class CatalogController {
         });
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+    @GetMapping("/catalogs/{productId}")
+    public ResponseEntity<ResponseCatalog> getCatalog(@PathVariable String productId) {
+        CatalogEntity catalogEntity = catalogService.getCatalog(productId);
+
+        if (catalogEntity != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new ModelMapper().map(catalogEntity, ResponseCatalog.class));
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 }

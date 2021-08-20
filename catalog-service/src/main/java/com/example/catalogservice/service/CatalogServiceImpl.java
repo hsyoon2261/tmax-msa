@@ -22,4 +22,9 @@ public class CatalogServiceImpl implements CatalogService{
     public Iterable<CatalogEntity> getAllCatalogs() {
         return catalogRepository.findAll();
     }
+
+    @Override
+    public CatalogEntity getCatalog(String productId) {
+        return catalogRepository.findByProductId(productId);
+    }
 }
